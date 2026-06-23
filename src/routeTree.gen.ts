@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as MediaFeedRouteImport } from './routes/media-feed'
 import { Route as MarketInsightsRouteImport } from './routes/market-insights'
 import { Route as InventoryRouteImport } from './routes/inventory'
 import { Route as ConciergeRouteImport } from './routes/concierge'
@@ -18,6 +19,11 @@ import { Route as ShowroomSlugRouteImport } from './routes/showroom.$slug'
 import { Route as AdminShowroomRouteImport } from './routes/admin.showroom'
 import { Route as AdminGlobalRouteImport } from './routes/admin.global'
 
+const MediaFeedRoute = MediaFeedRouteImport.update({
+  id: '/media-feed',
+  path: '/media-feed',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MarketInsightsRoute = MarketInsightsRouteImport.update({
   id: '/market-insights',
   path: '/market-insights',
@@ -65,6 +71,7 @@ export interface FileRoutesByFullPath {
   '/concierge': typeof ConciergeRoute
   '/inventory': typeof InventoryRoute
   '/market-insights': typeof MarketInsightsRoute
+  '/media-feed': typeof MediaFeedRoute
   '/admin/global': typeof AdminGlobalRoute
   '/admin/showroom': typeof AdminShowroomRoute
   '/showroom/$slug': typeof ShowroomSlugRoute
@@ -75,6 +82,7 @@ export interface FileRoutesByTo {
   '/concierge': typeof ConciergeRoute
   '/inventory': typeof InventoryRoute
   '/market-insights': typeof MarketInsightsRoute
+  '/media-feed': typeof MediaFeedRoute
   '/admin/global': typeof AdminGlobalRoute
   '/admin/showroom': typeof AdminShowroomRoute
   '/showroom/$slug': typeof ShowroomSlugRoute
@@ -86,6 +94,7 @@ export interface FileRoutesById {
   '/concierge': typeof ConciergeRoute
   '/inventory': typeof InventoryRoute
   '/market-insights': typeof MarketInsightsRoute
+  '/media-feed': typeof MediaFeedRoute
   '/admin/global': typeof AdminGlobalRoute
   '/admin/showroom': typeof AdminShowroomRoute
   '/showroom/$slug': typeof ShowroomSlugRoute
@@ -98,6 +107,7 @@ export interface FileRouteTypes {
     | '/concierge'
     | '/inventory'
     | '/market-insights'
+    | '/media-feed'
     | '/admin/global'
     | '/admin/showroom'
     | '/showroom/$slug'
@@ -108,6 +118,7 @@ export interface FileRouteTypes {
     | '/concierge'
     | '/inventory'
     | '/market-insights'
+    | '/media-feed'
     | '/admin/global'
     | '/admin/showroom'
     | '/showroom/$slug'
@@ -118,6 +129,7 @@ export interface FileRouteTypes {
     | '/concierge'
     | '/inventory'
     | '/market-insights'
+    | '/media-feed'
     | '/admin/global'
     | '/admin/showroom'
     | '/showroom/$slug'
@@ -129,6 +141,7 @@ export interface RootRouteChildren {
   ConciergeRoute: typeof ConciergeRoute
   InventoryRoute: typeof InventoryRoute
   MarketInsightsRoute: typeof MarketInsightsRoute
+  MediaFeedRoute: typeof MediaFeedRoute
   AdminGlobalRoute: typeof AdminGlobalRoute
   AdminShowroomRoute: typeof AdminShowroomRoute
   ShowroomSlugRoute: typeof ShowroomSlugRoute
@@ -136,6 +149,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/media-feed': {
+      id: '/media-feed'
+      path: '/media-feed'
+      fullPath: '/media-feed'
+      preLoaderRoute: typeof MediaFeedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/market-insights': {
       id: '/market-insights'
       path: '/market-insights'
@@ -201,6 +221,7 @@ const rootRouteChildren: RootRouteChildren = {
   ConciergeRoute: ConciergeRoute,
   InventoryRoute: InventoryRoute,
   MarketInsightsRoute: MarketInsightsRoute,
+  MediaFeedRoute: MediaFeedRoute,
   AdminGlobalRoute: AdminGlobalRoute,
   AdminShowroomRoute: AdminShowroomRoute,
   ShowroomSlugRoute: ShowroomSlugRoute,
