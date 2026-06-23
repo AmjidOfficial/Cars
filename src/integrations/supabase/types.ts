@@ -14,16 +14,279 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      inventory: {
+        Row: {
+          brand: string
+          created_at: string
+          description: string | null
+          fuel_type: string | null
+          id: string
+          images: string[]
+          is_premium: boolean
+          mileage_km: number | null
+          model_year: number | null
+          price_formatted: string | null
+          price_pkr: number | null
+          showroom_id: string
+          status: Database["public"]["Enums"]["inventory_status"]
+          title: string
+          transmission: string | null
+          updated_at: string
+        }
+        Insert: {
+          brand: string
+          created_at?: string
+          description?: string | null
+          fuel_type?: string | null
+          id?: string
+          images?: string[]
+          is_premium?: boolean
+          mileage_km?: number | null
+          model_year?: number | null
+          price_formatted?: string | null
+          price_pkr?: number | null
+          showroom_id: string
+          status?: Database["public"]["Enums"]["inventory_status"]
+          title: string
+          transmission?: string | null
+          updated_at?: string
+        }
+        Update: {
+          brand?: string
+          created_at?: string
+          description?: string | null
+          fuel_type?: string | null
+          id?: string
+          images?: string[]
+          is_premium?: boolean
+          mileage_km?: number | null
+          model_year?: number | null
+          price_formatted?: string | null
+          price_pkr?: number | null
+          showroom_id?: string
+          status?: Database["public"]["Enums"]["inventory_status"]
+          title?: string
+          transmission?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "inventory_showroom_id_fkey"
+            columns: ["showroom_id"]
+            isOneToOne: false
+            referencedRelation: "showrooms"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      leads: {
+        Row: {
+          created_at: string
+          id: string
+          intent: Database["public"]["Enums"]["lead_intent"]
+          notes: string | null
+          target_inventory_id: string | null
+          target_showroom_id: string | null
+          user_agent: string | null
+          visitor_mobile: string | null
+          visitor_name: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          intent: Database["public"]["Enums"]["lead_intent"]
+          notes?: string | null
+          target_inventory_id?: string | null
+          target_showroom_id?: string | null
+          user_agent?: string | null
+          visitor_mobile?: string | null
+          visitor_name?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          intent?: Database["public"]["Enums"]["lead_intent"]
+          notes?: string | null
+          target_inventory_id?: string | null
+          target_showroom_id?: string | null
+          user_agent?: string | null
+          visitor_mobile?: string | null
+          visitor_name?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "leads_target_inventory_id_fkey"
+            columns: ["target_inventory_id"]
+            isOneToOne: false
+            referencedRelation: "inventory"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "leads_target_showroom_id_fkey"
+            columns: ["target_showroom_id"]
+            isOneToOne: false
+            referencedRelation: "showrooms"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      media_posts: {
+        Row: {
+          caption: string | null
+          created_at: string
+          id: string
+          media_type: Database["public"]["Enums"]["media_type"]
+          media_url: string
+          showroom_id: string
+        }
+        Insert: {
+          caption?: string | null
+          created_at?: string
+          id?: string
+          media_type?: Database["public"]["Enums"]["media_type"]
+          media_url: string
+          showroom_id: string
+        }
+        Update: {
+          caption?: string | null
+          created_at?: string
+          id?: string
+          media_type?: Database["public"]["Enums"]["media_type"]
+          media_url?: string
+          showroom_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "media_posts_showroom_id_fkey"
+            columns: ["showroom_id"]
+            isOneToOne: false
+            referencedRelation: "showrooms"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          display_name: string | null
+          id: string
+          mobile_number: string
+        }
+        Insert: {
+          created_at?: string
+          display_name?: string | null
+          id: string
+          mobile_number: string
+        }
+        Update: {
+          created_at?: string
+          display_name?: string | null
+          id?: string
+          mobile_number?: string
+        }
+        Relationships: []
+      }
+      showrooms: {
+        Row: {
+          call_number: string | null
+          city: string | null
+          cover_url: string | null
+          created_at: string
+          description: string | null
+          id: string
+          is_active: boolean
+          is_flagship: boolean
+          logo_url: string | null
+          name: string
+          owner_id: string
+          slug: string
+          tagline: string | null
+          theme_config: Json
+          updated_at: string
+          whatsapp_number: string | null
+        }
+        Insert: {
+          call_number?: string | null
+          city?: string | null
+          cover_url?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_active?: boolean
+          is_flagship?: boolean
+          logo_url?: string | null
+          name: string
+          owner_id: string
+          slug: string
+          tagline?: string | null
+          theme_config?: Json
+          updated_at?: string
+          whatsapp_number?: string | null
+        }
+        Update: {
+          call_number?: string | null
+          city?: string | null
+          cover_url?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_active?: boolean
+          is_flagship?: boolean
+          logo_url?: string | null
+          name?: string
+          owner_id?: string
+          slug?: string
+          tagline?: string | null
+          theme_config?: Json
+          updated_at?: string
+          whatsapp_number?: string | null
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "super_admin" | "showroom_admin" | "visitor"
+      inventory_status: "available" | "reserved" | "sold"
+      lead_intent:
+        | "callback"
+        | "whatsapp"
+        | "view_details"
+        | "concierge"
+        | "inventory_view"
+      media_type: "image" | "video"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +413,17 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["super_admin", "showroom_admin", "visitor"],
+      inventory_status: ["available", "reserved", "sold"],
+      lead_intent: [
+        "callback",
+        "whatsapp",
+        "view_details",
+        "concierge",
+        "inventory_view",
+      ],
+      media_type: ["image", "video"],
+    },
   },
 } as const
