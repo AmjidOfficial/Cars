@@ -13,7 +13,7 @@ function Placeholder({ title, blurb }: { title: string; blurb: string }) {
   );
 }
 
-export const MediaFeedRoute = createFileRoute("/media-feed")({
+export const Route = createFileRoute("/media-feed")({
   head: () => ({ meta: [{ title: "Media Feed — Bazar360" }] }),
   component: () => <Placeholder title="Media Feed" blurb="A scrolling, social-style feed of walkarounds, reels, and stories from every showroom is launching next." />,
 });
