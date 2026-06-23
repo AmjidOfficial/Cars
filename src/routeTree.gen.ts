@@ -9,38 +9,181 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as MediaFeedRouteImport } from './routes/media-feed'
+import { Route as MarketInsightsRouteImport } from './routes/market-insights'
+import { Route as InventoryRouteImport } from './routes/inventory'
+import { Route as ConciergeRouteImport } from './routes/concierge'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ShowroomSlugRouteImport } from './routes/showroom.$slug'
+import { Route as AdminShowroomRouteImport } from './routes/admin.showroom'
+import { Route as AdminGlobalRouteImport } from './routes/admin.global'
 
+const MediaFeedRoute = MediaFeedRouteImport.update({
+  id: '/media-feed',
+  path: '/media-feed',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MarketInsightsRoute = MarketInsightsRouteImport.update({
+  id: '/market-insights',
+  path: '/market-insights',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InventoryRoute = InventoryRouteImport.update({
+  id: '/inventory',
+  path: '/inventory',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConciergeRoute = ConciergeRouteImport.update({
+  id: '/concierge',
+  path: '/concierge',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ShowroomSlugRoute = ShowroomSlugRouteImport.update({
+  id: '/showroom/$slug',
+  path: '/showroom/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminShowroomRoute = AdminShowroomRouteImport.update({
+  id: '/admin/showroom',
+  path: '/admin/showroom',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminGlobalRoute = AdminGlobalRouteImport.update({
+  id: '/admin/global',
+  path: '/admin/global',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/concierge': typeof ConciergeRoute
+  '/inventory': typeof InventoryRoute
+  '/market-insights': typeof MarketInsightsRoute
+  '/media-feed': typeof MediaFeedRoute
+  '/admin/global': typeof AdminGlobalRoute
+  '/admin/showroom': typeof AdminShowroomRoute
+  '/showroom/$slug': typeof ShowroomSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/concierge': typeof ConciergeRoute
+  '/inventory': typeof InventoryRoute
+  '/market-insights': typeof MarketInsightsRoute
+  '/media-feed': typeof MediaFeedRoute
+  '/admin/global': typeof AdminGlobalRoute
+  '/admin/showroom': typeof AdminShowroomRoute
+  '/showroom/$slug': typeof ShowroomSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/concierge': typeof ConciergeRoute
+  '/inventory': typeof InventoryRoute
+  '/market-insights': typeof MarketInsightsRoute
+  '/media-feed': typeof MediaFeedRoute
+  '/admin/global': typeof AdminGlobalRoute
+  '/admin/showroom': typeof AdminShowroomRoute
+  '/showroom/$slug': typeof ShowroomSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/concierge'
+    | '/inventory'
+    | '/market-insights'
+    | '/media-feed'
+    | '/admin/global'
+    | '/admin/showroom'
+    | '/showroom/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/auth'
+    | '/concierge'
+    | '/inventory'
+    | '/market-insights'
+    | '/media-feed'
+    | '/admin/global'
+    | '/admin/showroom'
+    | '/showroom/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/auth'
+    | '/concierge'
+    | '/inventory'
+    | '/market-insights'
+    | '/media-feed'
+    | '/admin/global'
+    | '/admin/showroom'
+    | '/showroom/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthRoute: typeof AuthRoute
+  ConciergeRoute: typeof ConciergeRoute
+  InventoryRoute: typeof InventoryRoute
+  MarketInsightsRoute: typeof MarketInsightsRoute
+  MediaFeedRoute: typeof MediaFeedRoute
+  AdminGlobalRoute: typeof AdminGlobalRoute
+  AdminShowroomRoute: typeof AdminShowroomRoute
+  ShowroomSlugRoute: typeof ShowroomSlugRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/media-feed': {
+      id: '/media-feed'
+      path: '/media-feed'
+      fullPath: '/media-feed'
+      preLoaderRoute: typeof MediaFeedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/market-insights': {
+      id: '/market-insights'
+      path: '/market-insights'
+      fullPath: '/market-insights'
+      preLoaderRoute: typeof MarketInsightsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/inventory': {
+      id: '/inventory'
+      path: '/inventory'
+      fullPath: '/inventory'
+      preLoaderRoute: typeof InventoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/concierge': {
+      id: '/concierge'
+      path: '/concierge'
+      fullPath: '/concierge'
+      preLoaderRoute: typeof ConciergeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +191,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/showroom/$slug': {
+      id: '/showroom/$slug'
+      path: '/showroom/$slug'
+      fullPath: '/showroom/$slug'
+      preLoaderRoute: typeof ShowroomSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/showroom': {
+      id: '/admin/showroom'
+      path: '/admin/showroom'
+      fullPath: '/admin/showroom'
+      preLoaderRoute: typeof AdminShowroomRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/global': {
+      id: '/admin/global'
+      path: '/admin/global'
+      fullPath: '/admin/global'
+      preLoaderRoute: typeof AdminGlobalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthRoute: AuthRoute,
+  ConciergeRoute: ConciergeRoute,
+  InventoryRoute: InventoryRoute,
+  MarketInsightsRoute: MarketInsightsRoute,
+  MediaFeedRoute: MediaFeedRoute,
+  AdminGlobalRoute: AdminGlobalRoute,
+  AdminShowroomRoute: AdminShowroomRoute,
+  ShowroomSlugRoute: ShowroomSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
