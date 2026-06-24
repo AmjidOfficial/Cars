@@ -44,11 +44,12 @@ function InventoryPage() {
   const navigate = useNavigate({ from: Route.fullPath });
 
   function set(key: "q" | "type" | "make" | "city", value: string) {
-    navigate({ search: (prev) => ({ ...prev, [key]: value }) });
+    navigate({ search: (prev: z.infer<typeof searchSchema>) => ({ ...prev, [key]: value }) });
   }
   function clearAll() {
     navigate({ search: () => ({ q: "", type: "", make: "", city: "" }) });
   }
+
 
   const all = useQuery({
     queryKey: ["inventory-all"],
