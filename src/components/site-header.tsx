@@ -2,11 +2,6 @@ import { Link } from "@tanstack/react-router";
 import { Menu, Plus, User, X } from "lucide-react";
 import { useState } from "react";
 
-const NAV = [
-  { to: "/" as const, label: "Home" },
-  { to: "/showroom/$slug" as const, label: "Auto Choice", params: { slug: "auto-choice-peshawar" } },
-  { to: "/inventory" as const, label: "Showrooms" },
-];
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
