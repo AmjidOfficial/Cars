@@ -5,9 +5,10 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ============================================================
-   Bazar360 — Obsidian luxury design system.
-   All colors in oklch. Showroom pages override --primary etc.
-   via the ShowroomThemeProvider, which sets CSS vars on a wrapper.
+   Bazar360 — Deep Navy + Vibrant Orange design system.
+   Backgrounds: #0B132B (base) / #1C2541 (cards).
+   Accent: #F97316 (orange-500).
+   Fonts: Montserrat (display) + Inter (body).
    ============================================================ */
 
 @theme inline {
@@ -41,56 +42,56 @@
   --color-flagship: var(--flagship);
   --color-flagship-foreground: var(--flagship-foreground);
 
-  --font-display: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Montserrat", ui-sans-serif, system-ui, sans-serif;
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
 }
 
 :root {
-  --radius: 0.5rem;
+  --radius: 0.75rem;
 
-  /* Obsidian base */
-  --background: oklch(0.13 0.005 270);          /* #0a0a0b */
-  --foreground: oklch(0.98 0 0);
-  --surface: oklch(0.16 0.005 270);             /* #121214 */
-  --surface-elevated: oklch(0.2 0.006 270);
+  /* Deep navy base — #0B132B */
+  --background: oklch(0.18 0.04 265);
+  --foreground: oklch(0.99 0 0);
 
-  --card: oklch(0.17 0.005 270);
-  --card-foreground: oklch(0.98 0 0);
-  --popover: oklch(0.17 0.005 270);
-  --popover-foreground: oklch(0.98 0 0);
+  /* Surface / cards — #1C2541 */
+  --surface: oklch(0.26 0.06 268);
+  --surface-elevated: oklch(0.3 0.065 268);
 
-  /* Champagne gold primary — luxury accent */
-  --primary: oklch(0.85 0.09 85);
-  --primary-foreground: oklch(0.13 0.005 270);
+  --card: oklch(0.26 0.06 268);
+  --card-foreground: oklch(0.99 0 0);
+  --popover: oklch(0.26 0.06 268);
+  --popover-foreground: oklch(0.99 0 0);
 
-  --secondary: oklch(0.25 0.008 270);
-  --secondary-foreground: oklch(0.98 0 0);
+  /* Vibrant orange — #F97316 */
+  --primary: oklch(0.7 0.19 45);
+  --primary-foreground: oklch(0.99 0 0);
 
-  --muted: oklch(0.22 0.006 270);
-  --muted-foreground: oklch(0.65 0.01 270);
+  --secondary: oklch(0.32 0.05 268);
+  --secondary-foreground: oklch(0.99 0 0);
 
-  --accent: oklch(0.28 0.008 270);
-  --accent-foreground: oklch(0.98 0 0);
+  --muted: oklch(0.3 0.04 268);
+  --muted-foreground: oklch(0.72 0.02 260);
+
+  --accent: oklch(0.7 0.19 45);
+  --accent-foreground: oklch(0.99 0 0);
 
   --destructive: oklch(0.6 0.22 25);
-  --destructive-foreground: oklch(0.98 0 0);
+  --destructive-foreground: oklch(0.99 0 0);
 
-  --border: oklch(1 0 0 / 0.07);
+  --border: oklch(1 0 0 / 0.1);
   --input: oklch(1 0 0 / 0.1);
-  --ring: oklch(0.85 0.09 85 / 0.5);
+  --ring: oklch(0.7 0.19 45 / 0.5);
 
-  /* Flagship bar (Auto Choice Peshawar) */
-  --flagship: oklch(0.85 0.09 85);
-  --flagship-foreground: oklch(0.13 0.005 270);
+  --flagship: oklch(0.7 0.19 45);
+  --flagship-foreground: oklch(0.99 0 0);
 
-  --gradient-hero: linear-gradient(180deg, oklch(0.13 0.005 270) 0%, oklch(0.16 0.008 270) 100%);
-  --gradient-flagship: linear-gradient(90deg, oklch(0.85 0.09 85) 0%, oklch(0.92 0.07 90) 100%);
+  --gradient-hero: linear-gradient(180deg, oklch(0.18 0.04 265) 0%, oklch(0.22 0.05 268) 100%);
+  --gradient-flagship: linear-gradient(90deg, oklch(0.7 0.19 45) 0%, oklch(0.78 0.16 55) 100%);
 }
 
 .dark {
-  /* Same — app is always dark. Kept for shadcn compat. */
-  --background: oklch(0.13 0.005 270);
-  --foreground: oklch(0.98 0 0);
+  --background: oklch(0.18 0.04 265);
+  --foreground: oklch(0.99 0 0);
 }
 
 @layer base {
@@ -103,14 +104,20 @@
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
-  h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -0.02em; }
+  h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -0.015em; font-weight: 700; }
 }
 
 @utility tracking-display {
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
 }
 @utility surface-card {
   background-color: var(--color-card);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
+}
+@utility hero-grid-bg {
+  background-image:
+    linear-gradient(oklch(1 0 0 / 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, oklch(1 0 0 / 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
 }
