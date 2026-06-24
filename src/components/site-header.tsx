@@ -1,62 +1,53 @@
 import { Link } from "@tanstack/react-router";
-import { Menu, Sparkles, X } from "lucide-react";
+import { Menu, Plus, User, X } from "lucide-react";
 import { useState } from "react";
 
 const NAV = [
   { to: "/" as const, label: "Home" },
-  { to: "/inventory" as const, label: "Inventory" },
-  { to: "/media-feed" as const, label: "Media" },
-  { to: "/market-insights" as const, label: "Insights" },
-  { to: "/concierge" as const, label: "Concierge" },
+  { to: "/showroom/$slug" as const, label: "Auto Choice", params: { slug: "auto-choice-peshawar" } },
+  { to: "/inventory" as const, label: "Showrooms" },
 ];
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   return (
-    <header className="sticky top-0 z-40 backdrop-blur-xl bg-background/80 border-b border-border">
-      {/* Flagship bar — Auto Choice Peshawar */}
-      <Link
-        to="/showroom/$slug"
-        params={{ slug: "auto-choice-peshawar" }}
-        className="block w-full bg-[image:var(--gradient-flagship)] text-flagship-foreground"
-      >
-        <div className="mx-auto max-w-7xl px-4 py-1.5 flex items-center justify-center gap-2 text-[11px] sm:text-xs font-semibold tracking-widest uppercase">
-          <Sparkles className="h-3.5 w-3.5" />
-          <span>Flagship Showroom · Auto Choice Peshawar — Premium Fleet</span>
-        </div>
-      </Link>
-
-      <div className="mx-auto max-w-7xl px-4 h-16 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2">
-          <div className="h-8 w-8 rounded-md bg-primary text-primary-foreground grid place-items-center font-bold">
+    <header className="sticky top-0 z-40 backdrop-blur-xl bg-background/85 border-b border-border">
+      <div className="mx-auto max-w-7xl px-4 h-16 flex items-center justify-between gap-4">
+        <Link to="/" className="flex items-center gap-2 shrink-0">
+          <div className="h-9 w-9 rounded-lg bg-primary text-primary-foreground grid place-items-center font-display font-extrabold text-lg">
             B
           </div>
-          <div className="leading-none">
-            <div className="font-display text-lg tracking-display">Bazar360</div>
-            <div className="text-[10px] tracking-widest text-muted-foreground uppercase">
-              Automotive Marketplace
-            </div>
-          </div>
+          <div className="font-display text-xl font-extrabold tracking-display">Bazar360</div>
         </Link>
 
         <nav className="hidden md:flex items-center gap-1">
           {NAV.map((item) => (
             <Link
-              key={item.to}
+              key={item.label}
               to={item.to}
-              className="px-3 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-              activeProps={{ className: "px-3 py-2 text-sm text-foreground" }}
+              {...(item.params ? { params: item.params } : {})}
+              className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              activeProps={{ className: "px-4 py-2 text-sm font-medium text-foreground" }}
             >
               {item.label}
             </Link>
           ))}
+        </nav>
+
+        <div className="hidden md:flex items-center gap-2">
           <Link
             to="/auth"
-            className="ml-2 px-4 py-2 text-sm font-medium rounded-md bg-primary text-primary-foreground hover:opacity-90 transition"
+            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg border border-border text-foreground hover:bg-surface transition"
           >
-            Sign in
+            <User className="h-4 w-4" /> Login
           </Link>
-        </nav>
+          <Link
+            to="/admin/showroom"
+            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-lg bg-primary text-primary-foreground hover:opacity-90 transition"
+          >
+            <Plus className="h-4 w-4" /> Post Ad
+          </Link>
+        </div>
 
         <button
           className="md:hidden p-2 -mr-2"
@@ -69,11 +60,12 @@ export function SiteHeader() {
 
       {open && (
         <div className="md:hidden border-t border-border bg-background/95">
-          <div className="px-4 py-3 flex flex-col">
+          <div className="px-4 py-3 flex flex-col gap-1">
             {NAV.map((item) => (
               <Link
-                key={item.to}
+                key={item.label}
                 to={item.to}
+                {...(item.params ? { params: item.params } : {})}
                 onClick={() => setOpen(false)}
                 className="py-3 text-sm text-muted-foreground"
                 activeProps={{ className: "py-3 text-sm text-foreground" }}
@@ -81,13 +73,22 @@ export function SiteHeader() {
                 {item.label}
               </Link>
             ))}
-            <Link
-              to="/auth"
-              onClick={() => setOpen(false)}
-              className="mt-2 px-4 py-3 text-sm font-medium rounded-md bg-primary text-primary-foreground text-center"
-            >
-              Sign in
-            </Link>
+            <div className="mt-2 grid grid-cols-2 gap-2">
+              <Link
+                to="/auth"
+                onClick={() => setOpen(false)}
+                className="inline-flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium rounded-lg border border-border"
+              >
+                <User className="h-4 w-4" /> Login
+              </Link>
+              <Link
+                to="/admin/showroom"
+                onClick={() => setOpen(false)}
+                className="inline-flex items-center justify-center gap-2 px-4 py-3 text-sm font-semibold rounded-lg bg-primary text-primary-foreground"
+              >
+                <Plus className="h-4 w-4" /> Post Ad
+              </Link>
+            </div>
           </div>
         </div>
       )}
