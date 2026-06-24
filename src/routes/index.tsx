@@ -87,10 +87,17 @@ function Hero() {
             <SearchSelect value={city} onChange={setCity} placeholder="Any City" options={["Any City", "Karachi", "Lahore", "Islamabad", "Peshawar", "Quetta", "Faisalabad"]} />
             <Link
               to="/inventory"
+              search={{
+                q: "",
+                type: type === "All Types" ? "" : type,
+                make: make === "Any Make" ? "" : make,
+                city: city === "Any City" ? "" : city,
+              }}
               className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:opacity-90"
             >
               <Search className="h-4 w-4" /> Search
             </Link>
+
           </div>
         </div>
 

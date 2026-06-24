@@ -19,12 +19,13 @@ export function SiteHeader() {
           <Link to="/" className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors" activeProps={{ className: "px-4 py-2 text-sm font-medium text-foreground" }}>
             Home
           </Link>
-          <Link to="/showroom/$slug" params={{ slug: "auto-choice-peshawar" }} className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors" activeProps={{ className: "px-4 py-2 text-sm font-medium text-foreground" }}>
+          <Link to="/auto-choice" className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors" activeProps={{ className: "px-4 py-2 text-sm font-medium text-foreground" }}>
             Auto Choice
           </Link>
-          <Link to="/inventory" className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors" activeProps={{ className: "px-4 py-2 text-sm font-medium text-foreground" }}>
+          <Link to="/showrooms" className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors" activeProps={{ className: "px-4 py-2 text-sm font-medium text-foreground" }}>
             Showrooms
           </Link>
+
         </nav>
 
 
@@ -56,8 +57,9 @@ export function SiteHeader() {
         <div className="md:hidden border-t border-border bg-background/95">
           <div className="px-4 py-3 flex flex-col gap-1">
             <Link to="/" onClick={() => setOpen(false)} className="py-3 text-sm text-muted-foreground" activeProps={{ className: "py-3 text-sm text-foreground" }}>Home</Link>
-            <Link to="/showroom/$slug" params={{ slug: "auto-choice-peshawar" }} onClick={() => setOpen(false)} className="py-3 text-sm text-muted-foreground" activeProps={{ className: "py-3 text-sm text-foreground" }}>Auto Choice</Link>
-            <Link to="/inventory" onClick={() => setOpen(false)} className="py-3 text-sm text-muted-foreground" activeProps={{ className: "py-3 text-sm text-foreground" }}>Showrooms</Link>
+            <Link to="/auto-choice" onClick={() => setOpen(false)} className="py-3 text-sm text-muted-foreground" activeProps={{ className: "py-3 text-sm text-foreground" }}>Auto Choice</Link>
+            <Link to="/showrooms" onClick={() => setOpen(false)} className="py-3 text-sm text-muted-foreground" activeProps={{ className: "py-3 text-sm text-foreground" }}>Showrooms</Link>
+
 
             <div className="mt-2 grid grid-cols-2 gap-2">
               <Link

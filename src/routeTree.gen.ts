@@ -9,16 +9,23 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ShowroomsRouteImport } from './routes/showrooms'
 import { Route as MediaFeedRouteImport } from './routes/media-feed'
 import { Route as MarketInsightsRouteImport } from './routes/market-insights'
 import { Route as InventoryRouteImport } from './routes/inventory'
 import { Route as ConciergeRouteImport } from './routes/concierge'
+import { Route as AutoChoiceRouteImport } from './routes/auto-choice'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ShowroomSlugRouteImport } from './routes/showroom.$slug'
 import { Route as AdminShowroomRouteImport } from './routes/admin.showroom'
 import { Route as AdminGlobalRouteImport } from './routes/admin.global'
 
+const ShowroomsRoute = ShowroomsRouteImport.update({
+  id: '/showrooms',
+  path: '/showrooms',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MediaFeedRoute = MediaFeedRouteImport.update({
   id: '/media-feed',
   path: '/media-feed',
@@ -37,6 +44,11 @@ const InventoryRoute = InventoryRouteImport.update({
 const ConciergeRoute = ConciergeRouteImport.update({
   id: '/concierge',
   path: '/concierge',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AutoChoiceRoute = AutoChoiceRouteImport.update({
+  id: '/auto-choice',
+  path: '/auto-choice',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthRoute = AuthRouteImport.update({
@@ -68,10 +80,12 @@ const AdminGlobalRoute = AdminGlobalRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/auto-choice': typeof AutoChoiceRoute
   '/concierge': typeof ConciergeRoute
   '/inventory': typeof InventoryRoute
   '/market-insights': typeof MarketInsightsRoute
   '/media-feed': typeof MediaFeedRoute
+  '/showrooms': typeof ShowroomsRoute
   '/admin/global': typeof AdminGlobalRoute
   '/admin/showroom': typeof AdminShowroomRoute
   '/showroom/$slug': typeof ShowroomSlugRoute
@@ -79,10 +93,12 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/auto-choice': typeof AutoChoiceRoute
   '/concierge': typeof ConciergeRoute
   '/inventory': typeof InventoryRoute
   '/market-insights': typeof MarketInsightsRoute
   '/media-feed': typeof MediaFeedRoute
+  '/showrooms': typeof ShowroomsRoute
   '/admin/global': typeof AdminGlobalRoute
   '/admin/showroom': typeof AdminShowroomRoute
   '/showroom/$slug': typeof ShowroomSlugRoute
@@ -91,10 +107,12 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/auto-choice': typeof AutoChoiceRoute
   '/concierge': typeof ConciergeRoute
   '/inventory': typeof InventoryRoute
   '/market-insights': typeof MarketInsightsRoute
   '/media-feed': typeof MediaFeedRoute
+  '/showrooms': typeof ShowroomsRoute
   '/admin/global': typeof AdminGlobalRoute
   '/admin/showroom': typeof AdminShowroomRoute
   '/showroom/$slug': typeof ShowroomSlugRoute
@@ -104,10 +122,12 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/auth'
+    | '/auto-choice'
     | '/concierge'
     | '/inventory'
     | '/market-insights'
     | '/media-feed'
+    | '/showrooms'
     | '/admin/global'
     | '/admin/showroom'
     | '/showroom/$slug'
@@ -115,10 +135,12 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/auth'
+    | '/auto-choice'
     | '/concierge'
     | '/inventory'
     | '/market-insights'
     | '/media-feed'
+    | '/showrooms'
     | '/admin/global'
     | '/admin/showroom'
     | '/showroom/$slug'
@@ -126,10 +148,12 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/auth'
+    | '/auto-choice'
     | '/concierge'
     | '/inventory'
     | '/market-insights'
     | '/media-feed'
+    | '/showrooms'
     | '/admin/global'
     | '/admin/showroom'
     | '/showroom/$slug'
@@ -138,10 +162,12 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthRoute: typeof AuthRoute
+  AutoChoiceRoute: typeof AutoChoiceRoute
   ConciergeRoute: typeof ConciergeRoute
   InventoryRoute: typeof InventoryRoute
   MarketInsightsRoute: typeof MarketInsightsRoute
   MediaFeedRoute: typeof MediaFeedRoute
+  ShowroomsRoute: typeof ShowroomsRoute
   AdminGlobalRoute: typeof AdminGlobalRoute
   AdminShowroomRoute: typeof AdminShowroomRoute
   ShowroomSlugRoute: typeof ShowroomSlugRoute
@@ -149,6 +175,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/showrooms': {
+      id: '/showrooms'
+      path: '/showrooms'
+      fullPath: '/showrooms'
+      preLoaderRoute: typeof ShowroomsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/media-feed': {
       id: '/media-feed'
       path: '/media-feed'
@@ -175,6 +208,13 @@ declare module '@tanstack/react-router' {
       path: '/concierge'
       fullPath: '/concierge'
       preLoaderRoute: typeof ConciergeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auto-choice': {
+      id: '/auto-choice'
+      path: '/auto-choice'
+      fullPath: '/auto-choice'
+      preLoaderRoute: typeof AutoChoiceRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth': {
@@ -218,10 +258,12 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRoute: AuthRoute,
+  AutoChoiceRoute: AutoChoiceRoute,
   ConciergeRoute: ConciergeRoute,
   InventoryRoute: InventoryRoute,
   MarketInsightsRoute: MarketInsightsRoute,
   MediaFeedRoute: MediaFeedRoute,
+  ShowroomsRoute: ShowroomsRoute,
   AdminGlobalRoute: AdminGlobalRoute,
   AdminShowroomRoute: AdminShowroomRoute,
   ShowroomSlugRoute: ShowroomSlugRoute,
